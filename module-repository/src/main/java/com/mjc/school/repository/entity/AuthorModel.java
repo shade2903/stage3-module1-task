@@ -19,19 +19,23 @@ public class AuthorModel {
     public void setName(String name) {
         this.name = name;
     }
-    private static class AuthorModelBuilder{
-        private AuthorModel authorModel;
+
+    public static AuthorModelBuilder getBuilder(){
+        return  new AuthorModelBuilder();
+    }
+    public static class AuthorModelBuilder{
+        private final AuthorModel authorModel;
 
         public AuthorModelBuilder(){
             authorModel = new AuthorModel();
         }
 
-        private AuthorModelBuilder setId(Long id){
+        public AuthorModelBuilder setId(Long id){
             authorModel.id = id;
             return this;
         }
 
-        private AuthorModelBuilder setName (String name){
+        public AuthorModelBuilder setName (String name){
             authorModel.name = name;
             return this;
         }

@@ -1,33 +1,39 @@
 package com.mjc.school.repository.impl;
 
 import com.mjc.school.repository.Repository;
+import com.mjc.school.repository.domain.DataSource;
 import com.mjc.school.repository.entity.NewsModel;
 
 import java.util.List;
 
 public class RepositoryImpl implements Repository<NewsModel> {
+    private DataSource dataSource;
+
+    public RepositoryImpl(){
+        dataSource = DataSource.getInstance();
+    }
     @Override
     public NewsModel create(NewsModel entity) {
-        return null;
+        return dataSource.addNews(entity);
     }
 
     @Override
     public List<NewsModel> readAll() {
-        return null;
+        return dataSource.getAllNews();
     }
 
     @Override
     public NewsModel getById(Long id) {
-        return null;
+        return dataSource.getNewsById(id);
     }
 
     @Override
     public NewsModel update(NewsModel entity) {
-        return null;
+        return dataSource.updateNews(entity);
     }
 
     @Override
     public Boolean delete(Long id) {
-        return null;
+        return dataSource.removeNews(getById(id));
     }
 }
