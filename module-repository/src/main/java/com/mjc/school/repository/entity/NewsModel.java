@@ -11,6 +11,9 @@ public class NewsModel {
     private LocalDateTime lastUpdateDate;
     private Long authorId;
 
+    public NewsModel() {
+    }
+
     public Long getId() {
         return id;
     }
