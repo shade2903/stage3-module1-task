@@ -43,4 +43,10 @@ public class NewsValidator {
             throw new InvalidDataException(String.format(NOT_VALID_TITLE,MIN_TITLE_LENGTH, MAX_TITLE_LENGTH, title.length()));
         }
     }
+
+    public void validateNewsExist(Long id, NewsDto newsDto){
+        if(newsDto == null){
+            throw new NotFoundException(String.format(NOT_FOUND_DATA, "News", id));
+        }
+    }
 }

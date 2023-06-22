@@ -82,7 +82,7 @@ public class DataSource {
 
     public NewsModel getNewsById(Long id){
         return newsModels.stream().filter(e -> Objects.equals(e.getId(), id))
-                .findFirst().get();
+                .findFirst().orElse(null);
     }
 
 
