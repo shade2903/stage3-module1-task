@@ -6,6 +6,7 @@ import com.mjc.school.repository.impl.RepositoryImpl;
 import com.mjc.school.service.NewsService;
 import com.mjc.school.service.dto.NewsDto;
 import com.mjc.school.service.mapper.NewsMapper;
+import com.mjc.school.service.utils.NewsValidator;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,12 +16,17 @@ public class NewsServiceImpl implements NewsService<NewsDto> {
     private final NewsMapper newsMapper;
     private final Repository<NewsModel> repository;
 
+    private final NewsValidator newsValidator;
+
     public NewsServiceImpl(){
         newsMapper = NewsMapper.INSTANCE;
         repository = new RepositoryImpl();
+        newsValidator = new NewsValidator();
     }
     @Override
     public NewsDto createNews(NewsDto entity) throws RuntimeException {
+        newsValidator.validateDTO(entity);
+
         return null;
     }
 
