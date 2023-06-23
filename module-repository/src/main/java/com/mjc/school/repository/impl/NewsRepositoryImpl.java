@@ -1,15 +1,15 @@
 package com.mjc.school.repository.impl;
 
-import com.mjc.school.repository.Repository;
+import com.mjc.school.repository.NewsRepository;
 import com.mjc.school.repository.domain.DataSource;
 import com.mjc.school.repository.entity.NewsModel;
 
 import java.util.List;
 
-public class RepositoryImpl implements Repository<NewsModel> {
+public class NewsRepositoryImpl implements NewsRepository<NewsModel> {
     private DataSource dataSource;
 
-    public RepositoryImpl(){
+    public NewsRepositoryImpl(){
         dataSource = DataSource.getInstance();
     }
     @Override

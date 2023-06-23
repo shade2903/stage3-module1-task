@@ -2,7 +2,7 @@ package com.mjc.school.repository;
 
 import java.util.List;
 
-public interface Repository <T> {
+public interface NewsRepository<T> {
     T create(T entity);
     List<T> readAll();
     T getById(Long id);

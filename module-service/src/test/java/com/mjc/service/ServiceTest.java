@@ -1,15 +1,21 @@
 package com.mjc.service;
 
 import com.mjc.school.repository.entity.NewsModel;
+import com.mjc.school.service.NewsService;
 import com.mjc.school.service.dto.NewsDto;
+import com.mjc.school.service.impl.NewsServiceImpl;
 import com.mjc.school.service.mapper.NewsMapper;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 public class ServiceTest {
+
+
     private NewsModel modelNews = NewsModel.getBuilder()
             .setId(15L)
             .setTitle("Some test title")
@@ -27,6 +33,10 @@ public class ServiceTest {
             .setLastUpdateDate(LocalDateTime.now())
             .setAuthorId(7l)
             .build();
+
+
+
+
 
     @Test
     void testNewsModelFromDto(){
@@ -48,7 +58,21 @@ public class ServiceTest {
         assertEquals(testNewsDto.getCreateDate(),modelNews.getCreateDate());
         assertEquals(testNewsDto.getLastUpdateDate(),modelNews.getLastUpdateDate());
         assertEquals(testNewsDto.getAuthorId(),modelNews.getAuthorId());
+
     }
+
+    public static void main(String[] args) {
+        NewsService<NewsDto> newsService = new NewsServiceImpl();
+        for(NewsDto n : newsService.getAllNews()){
+            System.out.println(n);
+        }
+    }
+
+//    @Test
+//    void testGetAllNews(){
+//        List<NewsDto> newsDtoList = new ArrayList<>();
+//        assertEquals(newsDtoList.size(),20);
+//    }
 }
 
 

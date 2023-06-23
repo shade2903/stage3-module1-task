@@ -1,8 +1,8 @@
 package com.mjc.school.service.impl;
 
-import com.mjc.school.repository.Repository;
+import com.mjc.school.repository.NewsRepository;
 import com.mjc.school.repository.entity.NewsModel;
-import com.mjc.school.repository.impl.RepositoryImpl;
+import com.mjc.school.repository.impl.NewsRepositoryImpl;
 import com.mjc.school.service.NewsService;
 import com.mjc.school.service.dto.NewsDto;
 import com.mjc.school.service.mapper.NewsMapper;
@@ -14,20 +14,20 @@ import java.util.List;
 
 public class NewsServiceImpl implements NewsService<NewsDto> {
     private final NewsMapper newsMapper;
-    private final Repository<NewsModel> repository;
+    private final NewsRepository<NewsModel> repository;
 
     private final NewsValidator newsValidator;
 
     public NewsServiceImpl(){
         newsMapper = NewsMapper.INSTANCE;
-        repository = new RepositoryImpl();
+        repository = new NewsRepositoryImpl();
         newsValidator = new NewsValidator();
     }
     @Override
     public NewsDto createNews(NewsDto entity) throws RuntimeException {
         newsValidator.validateDTO(entity);
-
-        return null;
+        NewsModel news = repository.create(newsMapper.NewsModelFromDto(entity));
+        return newsMapper.NewsModelToDto(news);
     }
 
     @Override
@@ -42,16 +42,24 @@ public class NewsServiceImpl implements NewsService<NewsDto> {
 
     @Override
     public NewsDto getNewsById(Long id) throws RuntimeException {
-        return null;
+        NewsDto newsDto = newsMapper.NewsModelToDto(repository.getById(id));
+        newsValidator.validateNewsExist(id,newsDto);
+        return newsDto;
     }
 
     @Override
     public NewsDto updateNews(NewsDto entity) throws RuntimeException {
-        return null;
+        NewsDto newsDto = newsMapper.NewsModelToDto(repository.getById(entity.getId()));
+        newsValidator.validateNewsExist(entity.getId(), newsDto);
+        newsValidator.validateDTO(entity);
+        NewsModel updatedModel = repository.update(newsMapper.NewsModelFromDto(entity));
+        return newsMapper.NewsModelToDto(updatedModel);
     }
 
     @Override
     public Boolean deleteNews(Long id) throws RuntimeException {
-        return null;
+        NewsDto newsDto = newsMapper.NewsModelToDto(repository.getById(id));
+        newsValidator.validateNewsExist(id,newsDto);
+        return repository.delete(id);
     }
 }
