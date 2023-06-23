@@ -27,7 +27,7 @@ public class NewsValidator {
     }
 
     private void validateAuthorId(Long id){
-        if(id < MAX_AUTHOR_ID || id > MIN_AUTHOR_ID || id == null){
+        if(id > MAX_AUTHOR_ID || id < MIN_AUTHOR_ID || id == null){
             throw new NotFoundException(String.format(NOT_FOUND_DATA,"Author",id));
         }
     }

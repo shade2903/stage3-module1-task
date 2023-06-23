@@ -49,9 +49,9 @@ public class NewsServiceImpl implements NewsService<NewsDto> {
 
     @Override
     public NewsDto updateNews(NewsDto entity) throws RuntimeException {
-        NewsDto newsDto = newsMapper.NewsModelToDto(repository.getById(entity.getId()));
-        newsValidator.validateNewsExist(entity.getId(), newsDto);
         newsValidator.validateDTO(entity);
+        newsValidator.validateNewsExist(entity.getId(), entity);
+
         NewsModel updatedModel = repository.update(newsMapper.NewsModelFromDto(entity));
         return newsMapper.NewsModelToDto(updatedModel);
     }

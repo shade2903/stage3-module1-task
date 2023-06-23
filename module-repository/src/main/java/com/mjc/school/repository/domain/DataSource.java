@@ -3,10 +3,7 @@ package com.mjc.school.repository.domain;
 import com.mjc.school.repository.entity.AuthorModel;
 import com.mjc.school.repository.entity.NewsModel;
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,9 +13,9 @@ public class DataSource {
     public static DataSource instance;
     private final List<AuthorModel> authorModels;
     private final List<NewsModel> newsModels;
-    private static final String PATH_AUTHOR = "module-repository/src/main/resources/author.txt";
-    private static final String PATH_CONTENT = "module-repository/src/main/resources/content.txt";
-    private static final String PATH_NEWS = "module-repository/src/main/resources/news.txt";
+    private static final String PATH_AUTHOR = "author.txt";
+    private static final String PATH_CONTENT = "content.txt";
+    private static final String PATH_NEWS = "news.txt";
 
     private static final int DATA_SOURCE_SIZE = 20;
 
@@ -64,8 +61,10 @@ public class DataSource {
     }
 
     private List<String> readResourceFile(String path) {
+        ClassLoader classloader = Thread.currentThread().getContextClassLoader();
+        InputStream inputStream = classloader.getResourceAsStream(path);
         List<String> listData = new ArrayList<>();
-        try (BufferedReader reader = new BufferedReader(new FileReader(path))) {
+        try (BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream))) {
             String line;
             while ((line = reader.readLine()) != null) {
                 listData.add(line);
