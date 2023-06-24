@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Objects;
 
 public class DataSource {
-    public static DataSource instance;
+    public  static DataSource instance;
     private final List<AuthorModel> authorModels;
     private final List<NewsModel> newsModels;
     private static final String PATH_AUTHOR = "author.txt";

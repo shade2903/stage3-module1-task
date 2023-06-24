@@ -23,7 +23,7 @@ public class NewsRepositoryImpl implements NewsRepository<NewsModel> {
     }
 
     @Override
-    public NewsModel getById(Long id) {
+    public NewsModel readById(Long id) {
         return dataSource.getNewsById(id);
     }
 
@@ -34,6 +34,6 @@ public class NewsRepositoryImpl implements NewsRepository<NewsModel> {
 
     @Override
     public Boolean delete(Long id) {
-        return dataSource.removeNews(getById(id));
+        return dataSource.removeNews(readById(id));
     }
 }

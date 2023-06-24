@@ -42,7 +42,7 @@ public class NewsServiceImpl implements NewsService<NewsDto> {
 
     @Override
     public NewsDto getNewsById(Long id) throws RuntimeException {
-        NewsDto newsDto = newsMapper.NewsModelToDto(repository.getById(id));
+        NewsDto newsDto = newsMapper.NewsModelToDto(repository.readById(id));
         newsValidator.validateNewsExist(id,newsDto);
         return newsDto;
     }
@@ -58,7 +58,7 @@ public class NewsServiceImpl implements NewsService<NewsDto> {
 
     @Override
     public Boolean deleteNews(Long id) throws RuntimeException {
-        NewsDto newsDto = newsMapper.NewsModelToDto(repository.getById(id));
+        NewsDto newsDto = newsMapper.NewsModelToDto(repository.readById(id));
         newsValidator.validateNewsExist(id,newsDto);
         return repository.delete(id);
     }
