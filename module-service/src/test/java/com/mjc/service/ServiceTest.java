@@ -91,6 +91,15 @@ public class ServiceTest {
         assertEquals(updatedNewsDto.getId(),expectedId);
         System.out.println(newsDto);
     }
+
+    @Test
+    void testDeleteNews(){
+        List<NewsDto> newsDtoList = newsService.getAllNews();
+        assertEquals(newsDtoList.size(),20);
+        assertTrue(newsService.deleteNews(5l));
+        List<NewsDto> newsDtoList1 = newsService.getAllNews();
+        assertEquals(newsDtoList1.size(),19);
+    }
 }
 
 

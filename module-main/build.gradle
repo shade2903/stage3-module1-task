@@ -10,8 +10,7 @@ repositories {
 }
 
 dependencies {
-    implementation project(':module-repository')
-    implementation project(':module-service')
+    implementation project(':module-web')
 }
 
 test {
