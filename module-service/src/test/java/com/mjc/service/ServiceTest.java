@@ -8,6 +8,7 @@ import com.mjc.school.service.dto.NewsDto;
 import com.mjc.school.service.impl.NewsServiceImpl;
 import com.mjc.school.service.mapper.NewsMapper;
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -92,13 +93,30 @@ public class ServiceTest {
         System.out.println(newsDto);
     }
 
+
     @Test
-    void testDeleteNews(){
-        List<NewsDto> newsDtoList = newsService.getAllNews();
-        assertEquals(newsDtoList.size(),20);
+     void testDeleteNews(){
+        int actualListSizeBeforeOperation = newsService.getAllNews().size();
         assertTrue(newsService.deleteNews(5l));
-        List<NewsDto> newsDtoList1 = newsService.getAllNews();
-        assertEquals(newsDtoList1.size(),19);
+        int actualListSizeAfterOperation = newsService.getAllNews().size();
+        assertEquals(actualListSizeBeforeOperation -1,actualListSizeAfterOperation);
+    }
+
+    @Test
+
+    void testCreateNews(){
+        int actualListSizeBeforeOperation = newsService.getAllNews().size();
+        NewsDto newsDto1 = NewsDto.getBuilder()
+                .setTitle("TitleTestFromDto")
+                .setContent("ContentTestFromDto")
+                .setAuthorId(12l)
+                .build();
+        NewsDto newDtoFromServer = newsService.createNews(newsDto1);
+        int actualListSizeAfterOperation = newsService.getAllNews().size();
+        assertEquals(actualListSizeBeforeOperation +1,actualListSizeAfterOperation);
+        assertEquals(newDtoFromServer.getTitle(), newsDto1.getTitle());
+        assertEquals(newDtoFromServer.getContent(), newsDto1.getContent());
+        assertEquals(newDtoFromServer.getAuthorId(), newsDto1.getAuthorId());
     }
 }
 

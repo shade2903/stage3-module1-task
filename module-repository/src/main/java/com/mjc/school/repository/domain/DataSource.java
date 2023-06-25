@@ -88,6 +88,8 @@ public class DataSource {
     public NewsModel addNews(NewsModel entity) {
         Long id = newsModels.get(newsModels.size() -1).getId() + 1L;
         entity.setId(id);
+        entity.setCreateDate(LocalDateTime.now());
+        entity.setLastUpdateDate(LocalDateTime.now());
         newsModels.add(entity);
         return entity;
     }

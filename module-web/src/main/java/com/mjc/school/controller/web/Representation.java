@@ -69,7 +69,7 @@ public class Representation {
             newsDto.setContent(input.nextLine());
             System.out.println(MenuConstants.ENTER_AUTHOR_ID);
             newsDto.setAuthorId(inputNumberValidator(input));
-            controller.update(newsDto);
+            controller.create(newsDto);
         }catch (InvalidDataException | NotFoundException e) {
             System.out.println(e.getMessage());
         }

@@ -22,8 +22,8 @@ public class NewsValidator {
 
     public void validateDTO(NewsDto newsDto){
         validateTitle(newsDto.getTitle());
-        validateContent(newsDto.getTitle());
-        validateAuthorId(newsDto.getId());
+        validateContent(newsDto.getContent());
+        validateAuthorId(newsDto.getAuthorId());
     }
 
     private void validateAuthorId(Long id){
